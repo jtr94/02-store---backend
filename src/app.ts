@@ -1,10 +1,17 @@
-import { Server } from "./presentation/server"; 
+import { envs } from "./config/envs";
+import { Server } from "./presentation/server";
 import { AppRoutes } from "./presentation/routes";
+import { MongoDB } from "./data";
 
-(async () => { main() })()
+(async () => {
+  main();
+})();
 
-function main(){
-    const server = new Server({port: 3000, routes: AppRoutes.routes});
+function main() {
+  MongoDB.connection({dbUrl: envs.DATABASE_URL, dbName: envs.DATABASE_NAME});
+  console.log("connected!");
+  
+  const server = new Server({ port: envs.PORT, routes: AppRoutes.routes });
 
-    server.run();
+  server.run();
 }

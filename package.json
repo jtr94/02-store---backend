@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "tsx watch src/app.ts"
+    "dev": "tsx watch src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +13,10 @@
   "type": "module",
   "dependencies": {
     "@types/express": "^5.0.6",
+    "dotenv": "^17.4.2",
+    "env-var": "^7.5.0",
     "express": "^5.2.1",
+    "mongoose": "^9.8.0",
     "tsx": "^4.23.1",
     "typescript": "^7.0.2"
   }
