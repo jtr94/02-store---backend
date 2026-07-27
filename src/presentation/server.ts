@@ -1,4 +1,4 @@
-import express, {Router, json, urlencoded} from 'express';
+import express, { Router, json, urlencoded } from 'express';
 
 interface Options{
     port: number,
