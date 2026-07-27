@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Email required'],
         unique: true,
     },
+    emailValidated: {
+        type: Boolean,
+        default: false,
+    },
     img: {
         type: String,
     },
