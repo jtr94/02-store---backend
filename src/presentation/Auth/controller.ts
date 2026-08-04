@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { checkSchema, validationResult } from "express-validator";
 import { registerSchema } from "../../domain/validator/auth/register.validator";
+import { RegisterDTO } from "../../domain";
 
 
 export class AuthController {
@@ -12,8 +13,9 @@ export class AuthController {
     }
 
     public register (req: Request, res: Response) {
-        const result = validationResult(req);
+        const result = validationResult(req.body);
         if (result.isEmpty()) {
+            const registerDTO = RegisterDTO.create(req.body);
             return res.json("register");
         }
         res.status(401).json({ errors: result.array() });

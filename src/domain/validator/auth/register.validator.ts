@@ -1,4 +1,3 @@
-import { body, validationResult} from "express-validator"
 import type { Schema } from "express-validator"
 
 export const registerSchema: Schema = {
@@ -30,7 +29,3 @@ export const registerSchema: Schema = {
         }
     }
 } 
-
-// export const registerValidation = () => {
-
-// }

@@ -1,5 +1,7 @@
 import {Router} from 'express';
 import { AuthController } from './controller';
+import { checkSchema } from "express-validator";
+import { registerSchema } from "../../domain/";
 
 export class AuthRoutes{    
 
@@ -8,7 +10,7 @@ export class AuthRoutes{
         const authController = new AuthController();
         const router = Router();
         
-        router.post("/login", authController.login );
+        router.post("/login", checkSchema(registerSchema), authController.login );
         router.post("/register", authController.register );
         router.get("/email-verification/:token", authController.verifyEmail);
 
