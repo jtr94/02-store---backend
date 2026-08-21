@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema({
         type: [String],
         enum: ['ADMIN', 'USER', 'GUEST'],
         default: ['USER'],
-        unique: true,
     }
 });
 

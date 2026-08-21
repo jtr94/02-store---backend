@@ -7,8 +7,8 @@ export class RegisterDTO{
     ){}    
 
     static create (object: {[keys: string]:any}){
-        const { name, email, password } = object
-
+        const { name, email, password } = object;
+        String(email).toLowerCase();
         return new RegisterDTO( name, email, password );
     }
 }
