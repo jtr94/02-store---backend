@@ -1,5 +1,5 @@
 import { UserModel } from "../../data";
-import { RegisterDTO } from "../../domain";
+import { RegisterDTO, UserEntity } from "../../domain";
 
 export class AuthService{
     constructor(){}
@@ -10,8 +10,10 @@ export class AuthService{
     
     try {
       const user = new UserModel(regdto);
-      await user.save();      
-      return user;
+      await user.save();
+      
+      const {password, ...userInfo} = UserEntity.fromObject(user);      
+      return {...userInfo};
         
     } catch (error) {
         console.log(error);        
