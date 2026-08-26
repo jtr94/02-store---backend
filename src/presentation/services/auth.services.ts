@@ -1,6 +1,6 @@
 import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { UserModel } from "../../data";
-import { RegisterDTO, UserEntity } from "../../domain";
+import { LoginDTO, RegisterDTO, UserEntity } from "../../domain";
 
 export class AuthService{
     constructor(){}
@@ -19,6 +19,23 @@ export class AuthService{
       return {...userInfo};
         
     } catch (error) {
+        console.log(error);        
+        throw new Error(`${error}`);       
+    }
+    }
+
+    public async loginUser( logdto: LoginDTO){
+        console.log(logdto.email);
+        const user = await UserModel.findOne({ email: logdto.email});
+        console.log(user);
+        
+        if (! user) throw new Error("User not found!");
+
+        try{
+            if (!bcryptAdapter.compare(logdto.password, user.password)) throw new Error("Verification failed");
+            return user;
+        }
+        catch (error) {
         console.log(error);        
         throw new Error(`${error}`);       
     }

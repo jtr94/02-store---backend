@@ -1,4 +1,4 @@
-import type { Schema } from "express-validator"
+import type { Schema } from "express-validator";
 
 export const registerSchema: Schema = {
     name: {
