@@ -16,8 +16,7 @@ export class AuthService{
       await user.save();
       
       const {password, ...userInfo} = UserEntity.fromObject(user);      
-      return {...userInfo};
-        
+      return {...userInfo};        
     } catch (error) {
         console.log(error);        
         throw new Error(`${error}`);       
@@ -29,15 +28,11 @@ export class AuthService{
         const user = await UserModel.findOne({ email: logdto.email});
         console.log(user);
         
-        if (! user) throw new Error("User not found!");
+        if (! user) throw new Error("User not found!");       
+        const match = bcryptAdapter.compare(logdto.password, user.password);
+        if (!match) throw new Error("Verification failed");
 
-        try{
-            if (!bcryptAdapter.compare(logdto.password, user.password)) throw new Error("Verification failed");
-            return user;
-        }
-        catch (error) {
-        console.log(error);        
-        throw new Error(`${error}`);       
+        const { password, ...userLogInfo } = UserEntity.fromObject(user); 
+        return { ...userLogInfo, token: 1234 };        
     }
-    }
-}
+};
