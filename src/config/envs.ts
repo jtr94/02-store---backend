@@ -5,5 +5,5 @@ export const envs = {
     PORT: env.get('PORT').required().asPortNumber(),
     DATABASE_URL : env.get('DATABASE_URL').required().asString(),
     DATABASE_NAME: env.get('DATABASE_NAME').required().asString(),
-    
+    JWT_SEEDER: env.get('JWT_SEEDER').required().asString(),
 }

@@ -1,3 +1,4 @@
+import { jwtAdapter } from "../../config";
 import { bcryptAdapter } from "../../config/bcrypt.adapter";
 import { UserModel } from "../../data";
 import { LoginDTO, RegisterDTO, UserEntity } from "../../domain";
@@ -33,6 +34,12 @@ export class AuthService{
         if (!match) throw new Error("Verification failed");
 
         const { password, ...userLogInfo } = UserEntity.fromObject(user); 
-        return { ...userLogInfo, token: 1234 };        
+        
+        const token = await jwtAdapter.generateToken({id: user.id});
+        console.log(token);
+        
+        if (!token) throw new Error("An Error has ocurred while token generation");
+
+        return { ...userLogInfo, token };        
     }
 };
