@@ -16,8 +16,12 @@ export class AuthService{
       user.password = bcryptAdapter.hash(user.password );
       await user.save();
       
-      const {password, ...userInfo} = UserEntity.fromObject(user);      
-      return {...userInfo};        
+      const {password, ...userInfo} = UserEntity.fromObject(user);    
+      
+      const token = await jwtAdapter.generateToken({id: userInfo.id},"15m");
+      if (!token) throw new Error("Erro generating token");
+    
+      return {user: userInfo, token};        
     } catch (error) {
         console.log(error);        
         throw new Error(`${error}`);       
@@ -34,12 +38,11 @@ export class AuthService{
         if (!match) throw new Error("Verification failed");
 
         const { password, ...userLogInfo } = UserEntity.fromObject(user); 
-        
+
         const token = await jwtAdapter.generateToken({id: user.id});
-        console.log(token);
         
         if (!token) throw new Error("An Error has ocurred while token generation");
 
-        return { ...userLogInfo, token };        
+        return { user: userLogInfo, token };        
     }
 };
