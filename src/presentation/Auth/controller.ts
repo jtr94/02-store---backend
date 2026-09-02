@@ -34,6 +34,7 @@ export class AuthController {
     }
 
     public verifyEmail = (req: Request, res: Response) => {
+        
         res.json("verifyEmail");
     }
 
