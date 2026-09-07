@@ -71,4 +71,16 @@ export class AuthService{
 
         return true;
     }
+
+    async validateEmail(token: string){
+        const payload = await jwtAdapter.verifyToken(token);
+        if(!payload) throw new Error("Error in email validation!");
+
+        const { email } = payload;
+        if(!payload) throw new Error("Email not found!");
+        
+        await UserModel.updateOne({ email }, {emailValidated: true} )
+        return true;
+            
 };
+}

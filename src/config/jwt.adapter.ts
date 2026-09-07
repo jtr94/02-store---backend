@@ -3,6 +3,12 @@ import { envs } from "./envs"
 
 const JWT_SEED = envs.JWT_SEEDER;
 
+interface Payload {
+    email: string,
+    iat: number, 
+    exp: number 
+};
+
 export const jwtAdapter = {
     async generateToken(payload: any, duration: any = "1h")
     {   
@@ -12,5 +18,20 @@ export const jwtAdapter = {
                resolve(token);          
            })
         })
+    },
+
+    async verifyToken(token: string) : Promise<Payload | null>{
+        return new Promise((resolve, reject) => {
+            jwt.verify(token, JWT_SEED, function (err:any, validation:any) {
+               if(err){
+                   resolve(null);
+                }              
+                resolve(validation);
+            })
+        })
+                
+      
+                       
+        
     }
 }

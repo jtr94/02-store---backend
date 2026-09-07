@@ -34,8 +34,10 @@ export class AuthController {
     }
 
     public verifyEmail = (req: Request, res: Response) => {
-        
-        res.json("verifyEmail");
+        const { token } = req.params;        
+        this.authService.validateEmail( String(token)  )
+          .then( () => res.json("Email succesfully verified!"))
+          .catch(error => { res.status(400).json({error: error.message})});
     }
 
 }
