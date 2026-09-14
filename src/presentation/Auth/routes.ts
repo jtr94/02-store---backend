@@ -10,9 +10,9 @@ export class AuthRoutes{
     static routes():Router {
         
         const emailService = new EmailService(envs.MAILERSERVICE,
-                                              envs.MAILERUSER,
-                                              envs.MAILERPASS,
-                                );
+                                              envs.MAILERUSER   ,
+                                              envs.MAILERPASS   ,
+                                              envs.SEND_EMAIL    );
         const authService = new AuthService(emailService);
         const authController = new AuthController(authService);
         const router = Router();

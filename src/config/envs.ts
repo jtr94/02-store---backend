@@ -8,6 +8,7 @@ export const envs = {
     BASE_URL: env.get('BASE_URL').required().asString(),
     JWT_SEEDER: env.get('JWT_SEEDER').required().asString(),
 
+    SEND_EMAIL: env.get('SEND_EMAIL').default('true').asBool(),
     MAILERSERVICE: env.get('MAILERSERVICE').required().asString(),
     MAILERUSER:env.get('MAILERUSER').required().asString(),
     MAILERPASS: env.get('MAILERPASS').required().asString(),    

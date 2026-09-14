@@ -51,7 +51,7 @@ export class AuthService{
         const token = await jwtAdapter.generateToken({ email });
         if (!token) throw new Error('Validation token not generated!');
 
-        const link = `${ envs.BASE_URL }auth/email-verification/${ token }`;
+        const link = `${ envs.BASE_URL }api/auth/email-verification/${ token }`;
         const htmlBody = `
             <div> 
                 <h1> VALIDATION REQUIRED</h1>
