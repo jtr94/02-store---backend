@@ -6,6 +6,10 @@ const categorySchema = new mongoose.Schema({
         require: [true, 'Category name required'],        
         unique: true,
     },
+    available:{
+        type: Boolean,
+        default: false
+    },
     user:{
         type: mongoose.Types.ObjectId,
         ref: 'User',
